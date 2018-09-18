@@ -1,0 +1,32 @@
+{
+  "nb_threads": 1,
+  "skip_subfolders": [],
+  "group_by_item": {
+    "module": "core_modules.group_by_item.default"
+  },
+  "load_item": {
+    "module": "core_modules.load_item.default"
+  },
+  "preprocessings": {
+    "1_get_labels": {
+      "module": "core_modules.preprocessing.labels_to_binary"
+    },
+    "2_format_y": {
+      "module": "core_modules.preprocessing.merge_y"
+    }
+  },
+  "generate_patches": {
+    "module": "core_modules.generate_patches.default",
+    "params": {
+      "shape": [256, 256]
+    }
+  },
+  "post_processings": {
+    "1_random_rotation": {
+      "module": "core_modules.post_processing.random_rotation"
+    },
+    "2_binarize": {
+      "module": "core_modules.post_processing.binarize"
+    }
+  }
+}
