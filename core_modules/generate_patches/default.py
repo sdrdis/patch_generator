@@ -15,7 +15,7 @@ def array_pad(arr, _pad, mode, **kwargs):
 def extract_padded(arr_np, patch):
     decal_y = max(0, -patch[0])
     decal_x = max(0, -patch[2])
-    pad = [(decal_y, max(0, patch[1] - arr_np.shape[0])), (decal_x, max(0, patch[3] - arr_np.shape[0]))]
+    pad = [(decal_y, max(0, patch[1] - arr_np.shape[0])), (decal_x, max(0, patch[3] - arr_np.shape[1]))]
     arr_np = array_pad(arr_np, pad, 'constant', constant_values=(0))
     return arr_np[patch[0]+decal_y:patch[1]+decal_y, patch[2]+decal_x:patch[3]+decal_x]
 
@@ -64,9 +64,7 @@ def generate(patch_i, item_data, subfolder_patches_path, params, thread_i, postp
         ex_y = extract_padded(y, larger_patch).astype(float)
         ex_complementary_X = complementary_X.copy()
 
-        start_time = time.time()
         for i in range(len(postprocessing_modules)):
-            print (time.time() - start_time)
             ex_X, ex_y, ex_complementary_X = postprocessing_modules[i].process(ex_X, ex_y, ex_complementary_X, postprocessing_params[i])
 
 
@@ -75,7 +73,7 @@ def generate(patch_i, item_data, subfolder_patches_path, params, thread_i, postp
 
 
         if (ex_y.shape[0] != patch_shape[0] or ex_y.shape[1] != patch_shape[1]):
-            print('DEBUG NEEDED!', patch_i, ex_y.shape, y.shape, '#'*30)
+            print('DEBUG NEEDED!', patch_i, ex_y.shape, y.shape, patch_shape, '#'*30)
             #continue
 
         patch_prefix = prefix.replace('(:thread_i)', str(thread_i))

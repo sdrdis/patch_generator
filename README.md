@@ -6,7 +6,7 @@ Python framework that allows you to generate patches from images and apply on th
 
 ## How to install
 
-You must have installed python 3.5 and pip.
+You must have installed python 3.6 and pip.
 
 1. Download the framework by cloning this github project or by clicking here
 2. Install dependencies writen in the `requirement.txt` file manually or by running `pip install -r requirements.txt` in the shell.

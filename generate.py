@@ -35,6 +35,10 @@ path_from = config['path']
 path_patches = config['path_patches']
 nb_threads = config['nb_threads']
 
+
+if (not isdir(path_patches)):
+    os.makedirs(path_patches)
+
 all_items = []
 for subfolder in os.listdir(path_from):
     if (subfolder in config['skip_subfolders']):
